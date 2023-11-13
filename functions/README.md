@@ -7,19 +7,21 @@
 ## Running dev server
 
 ```bash
-npm run start:host
-```
-
-## Testing
-
-```bash
-npm run test
+npm run start
 ```
 
 ## Deploying
 
 ```bash
-npm run deploy:prod
+# Switch Azure account
+az account set -s "MY SUBSCRIPTION"
+# Set configuration option
+echo function_name="MY AZURE FUNCTION RESOURCE NAME" >> .npmrc
 ```
 
-デベロッパパッケージが削除されるので、再度`npm install`してください。
+```bash
+# Publish to Azure
+npm run publish
+```
+
+

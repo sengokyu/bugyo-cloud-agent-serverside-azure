@@ -42,5 +42,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-/.npmrc
-/.test-data.json
+# Azurite artifacts
+__blobstorage__
+__queuestorage__
+__azurite_db*__.json
+
+.npmrc
+.test-data.json

@@ -6,10 +6,12 @@ const funcs = ["BugyoCloudAgent"];
 for (const func of funcs) {
   await esbuild.build({
     bundle: true,
-    entryPoints: [path.join(func, "index.ts")],
+    entryPoints: [path.join("src", "functions", func + ".ts")],
     platform: "node",
-    outdir: path.join("dist", func),
-    sourcemap: false,
-    target: "es2022",
+    outdir: path.join("dist", "src", "functions"),
+    sourcemap: true,
+    target: "node20",
+    // Is this provided in Azure environment ?
+    external: ["@azure/functions-core"],
   });
 }
