@@ -16,7 +16,7 @@ export async function BugyoCloudAgent(
   request: HttpRequest,
   context: InvocationContext
 ): Promise<HttpResponseInit> {
-  const myQueueItem = request.body;
+  const myQueueItem = await request.json();
 
   if (isQueueItem(myQueueItem)) {
     try {
@@ -25,11 +25,14 @@ export async function BugyoCloudAgent(
       return createRes(200, "OK");
     } catch (e) {
       context.error(e);
-      return createRes(500, e);
+      return createRes(
+        500,
+        e instanceof Error ? e.message : `Unknown error: ${e}`
+      );
     }
   } else {
-    const msg = `Unsupported input. ${request.body}`;
-    context.log(msg);
+    const msg = `Unsupported input. ${myQueueItem}`;
+    context.error(msg);
     return createRes(400, msg);
   }
 }
