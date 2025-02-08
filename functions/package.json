@@ -12,17 +12,14 @@
     "prepublish": "npm run clean && npm run build",
     "publish": "func azure functionapp publish $npm_config_function_name"
   },
-  "dependencies": {
-    "@azure/functions": "^4.0.0",
-    "bugyo-cloud-client": "^1.1.2",
-    "deasync": "^0.1.29"
-  },
   "devDependencies": {
+    "@azure/functions": "^4.6.1",
     "@tsconfig/node20": "^20.1.2",
     "@types/node": "^20.9.0",
     "azure-functions-core-tools": "^4.x",
-    "esbuild": "^0.19.5",
-    "rimraf": "^5.0.0",
+    "bugyo-cloud-client": "^1.4.1",
+    "esbuild": "^0.25.0",
+    "rimraf": "^6.0.1",
     "typescript": "^5.2.2"
   }
 }
