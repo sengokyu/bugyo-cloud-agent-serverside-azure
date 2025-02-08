@@ -2,8 +2,9 @@
   "name": "",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/src/functions/*.js",
+  "main": "dist/*.js",
   "scripts": {
+    "prebuild": "tsc --noEmit",
     "build": "node build.mjs",
     "clean": "rimraf dist",
     "prestart": "npm run clean && npm run build",
