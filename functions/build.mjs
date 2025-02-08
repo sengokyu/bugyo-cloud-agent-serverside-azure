@@ -6,9 +6,10 @@ const funcs = ["BugyoCloudAgent"];
 for (const func of funcs) {
   await esbuild.build({
     bundle: true,
+    minify: true,
     entryPoints: [path.join("src", "functions", func + ".ts")],
     platform: "node",
-    outdir: path.join("dist", "src", "functions"),
+    outdir: "dist",
     sourcemap: true,
     target: "node20",
     // Is this provided in Azure environment ?
