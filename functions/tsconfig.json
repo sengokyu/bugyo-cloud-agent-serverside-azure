@@ -4,5 +4,6 @@
     "sourceMap": true,
     "outDir": "dist",
     "rootDir": "."
-  }
+  },
+  "include": ["src/**/*"]
 }
