@@ -1,28 +1,3 @@
-resource "azurerm_resource_group" "bca" {
-  name     = "bugyo-cloud-agent"
-  location = local.location
-}
-
-### ストレージ
-###
-resource "azurerm_storage_account" "bca" {
-  name                     = "bugyocloudagent"
-  resource_group_name      = azurerm_resource_group.bca.name
-  location                 = local.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-}
-
-### App プラン
-###
-resource "azurerm_service_plan" "bca" {
-  name                = "bugyo-cloud-agent"
-  resource_group_name = azurerm_resource_group.bca.name
-  location            = local.location
-  os_type             = "Linux"
-  sku_name            = "Y1"
-}
-
 ### Function
 ###
 resource "azurerm_linux_function_app" "bca" {
@@ -34,12 +9,23 @@ resource "azurerm_linux_function_app" "bca" {
   storage_uses_managed_identity = true
   https_only                    = true
   builtin_logging_enabled       = false
+  zip_deploy_file               = archive_file.bca.output_path
 
   site_config {
+    http2_enabled = true
+    app_service_logs {
+      retention_period_days = 1
+    }
+    application_stack {
+      node_version = "20"
+    }
     cors {
       allowed_origins = ["https://sengokyu.cc"]
     }
-    http2_enabled = true
+  }
+
+  app_settings = {
+    FUNCTIONS_WORKER_RUNTIME = "node"
   }
 
   identity {
