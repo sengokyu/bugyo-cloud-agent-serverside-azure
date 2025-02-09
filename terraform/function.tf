@@ -9,7 +9,6 @@ resource "azurerm_linux_function_app" "bca" {
   storage_uses_managed_identity = true
   https_only                    = true
   builtin_logging_enabled       = false
-  zip_deploy_file               = archive_file.bca.output_path
 
   site_config {
     http2_enabled = true
@@ -26,6 +25,7 @@ resource "azurerm_linux_function_app" "bca" {
 
   app_settings = {
     FUNCTIONS_WORKER_RUNTIME = "node"
+    WEBSITE_RUN_FROM_PACKAGE = "${azurerm_storage_account.bca.primary_blob_endpoint}${local.package_container_name}/${local.package_name}"
   }
 
   identity {
