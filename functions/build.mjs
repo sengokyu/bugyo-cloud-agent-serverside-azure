@@ -9,7 +9,7 @@ for (const func of funcs) {
     minify: true,
     entryPoints: [path.join("src", "functions", func + ".ts")],
     platform: "node",
-    outdir: "dist",
+    outdir: path.join("dist", "src", "functions"),
     sourcemap: true,
     target: "node20",
     // Is this provided in Azure environment ?

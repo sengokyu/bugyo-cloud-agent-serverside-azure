@@ -2,16 +2,18 @@
   "name": "",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/*.js",
+  "main": "dist/src/functions/*.js",
   "scripts": {
     "prebuild": "tsc --noEmit",
     "build": "node build.mjs",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist package.zip",
     "prestart": "npm run clean && npm run build",
     "start": "func start",
     "test": "echo \"No tests yet...\"",
-    "prepublish": "npm run clean && npm run build",
-    "publish": "func azure functionapp publish $npm_config_function_name"
+    "prezip": "npm run clean && npm run build",
+    "zip": "zip -r package.zip host.json package.json dist",
+    "preazcopy": "npm run zip",
+    "azcopy": "az storage copy -s package.zip -d $npm_config_azcopy_dest"
   },
   "devDependencies": {
     "@azure/functions": "^4.6.1",
