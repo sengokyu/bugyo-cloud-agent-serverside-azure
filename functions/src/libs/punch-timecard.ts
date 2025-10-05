@@ -1,10 +1,7 @@
 import {
-  BugyoCloudClient,
+  BugyoCloudClientService,
   Logger,
   LoggerFactory,
-  LoginTask,
-  LogoutTask,
-  PunchTask,
 } from "bugyo-cloud-client";
 import { queueItem } from "./queue-item";
 
@@ -21,21 +18,20 @@ const loggerFactory: LoggerFactory = {
 };
 
 export const punchTimeCard = async (param: queueItem): Promise<void> => {
-  const loginTask = new LoginTask(
-    { loginId: param.username, password: param.password },
-    loggerFactory
-  );
-  const punchTask = new PunchTask(
-    {
-      clockType: param.clockType,
-      longitude: 35.6812,
-      latitude: 139.7742,
-    },
-    loggerFactory
-  );
-  const logoutTask = new LogoutTask(loggerFactory);
+  const service = new BugyoCloudClientService(loggerFactory);
 
-  const client = new BugyoCloudClient(param.tenantCode);
+  const loginTask = service.createLoginTask({
+    loginId: param.username,
+    password: param.password,
+  });
+  const punchTask = service.createPunchTask({
+    clockType: param.clockType,
+    longitude: 35.5,
+    latitude: 139.5,
+  });
+  const logoutTask = service.createLogoutTask();
+
+  const client = service.createClient(param.tenantCode);
 
   await client.doA(loginTask);
 
