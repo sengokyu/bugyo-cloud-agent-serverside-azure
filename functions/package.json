@@ -6,14 +6,12 @@
   "scripts": {
     "prebuild": "tsc --noEmit",
     "build": "node build.mjs",
-    "clean": "rimraf dist package.zip",
+    "clean": "rimraf dist ../package.zip",
     "prestart": "npm run clean && npm run build",
     "start": "func start",
     "test": "echo \"No tests yet...\"",
     "prezip": "npm run clean && npm run build",
-    "zip": "zip -r package.zip host.json package.json dist",
-    "preazcopy": "npm run zip",
-    "azcopy": "az storage copy -s package.zip -d $npm_config_azcopy_dest"
+    "zip": "zip -r ../package.zip host.json package.json dist"
   },
   "devDependencies": {
     "@azure/functions": "^4.8.0",
