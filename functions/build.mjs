@@ -11,7 +11,7 @@ for (const func of funcs) {
     platform: "node",
     outdir: path.join("dist", "src", "functions"),
     sourcemap: true,
-    target: "node20",
+    target: "node22",
     // Is this provided in Azure environment ?
     external: ["@azure/functions-core"],
   });
