@@ -16,11 +16,11 @@
     "azcopy": "az storage copy -s package.zip -d $npm_config_azcopy_dest"
   },
   "devDependencies": {
-    "@azure/functions": "^4.6.1",
-    "@tsconfig/node20": "^20.1.2",
-    "@types/node": "^20.9.0",
+    "@azure/functions": "^4.8.0",
+    "@tsconfig/node22": "^22.0.2",
+    "@types/node": "^22.18.8",
     "azure-functions-core-tools": "^4.x",
-    "bugyo-cloud-client": "^1.4.1",
+    "bugyo-cloud-client": "^2.0.1",
     "esbuild": "^0.25.0",
     "rimraf": "^6.0.1",
     "typescript": "^5.2.2"
