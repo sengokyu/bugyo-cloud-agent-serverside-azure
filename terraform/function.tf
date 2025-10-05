@@ -16,7 +16,7 @@ resource "azurerm_linux_function_app" "bca" {
       retention_period_days = 1
     }
     application_stack {
-      node_version = "20"
+      node_version = "22"
     }
     cors {
       allowed_origins = ["https://sengokyu.cc"]
@@ -41,3 +41,13 @@ resource "azurerm_role_assignment" "bca_function_storage" {
   role_definition_name = "Storage Blob Data Contributor"
 }
 
+## BLOB package.zip
+##
+resource "azurerm_storage_blob" "bca" {
+  storage_account_name   = azurerm_storage_account.bca.name
+  storage_container_name = local.package_container_name
+  name                   = local.package_name
+  type                   = "Block"
+  content_type           = "application/zip"
+  source                 = "../package.zip"
+}
